@@ -2,9 +2,11 @@
 
     1. Thread <-- utils/Thread.cpp、include/Thread.h
     2. MutexLock、MutexGuard<-- utils/MutexLock.cpp、include/MutexLock.h
-    3. ThreadAttr <-- utils/ThreadAttr.cpp、include/ThreadAttr.h
-    4. MutexLockAttr <-- utils/MutexLockAttr.cpp、include/MutexLockAttr.h
+    3. ThreadAttr <-- include/ThreadAttr.h
+    4. MutexLockAttr <-- include/MutexLockAttr.h
     5. AtomicInteger <-- include/AtomicInteger.h
+    6. CondVariable <-- utils/CondVariable.cpp、include/CondVariable.h
+    7. CondVariableAttr <-- include/CondVariableAttr.h
 
 Thread
     对pthreads中线程的简单封装。
@@ -29,3 +31,9 @@ MutexLockAttr
 
 AtomicInteger
     原子整数，提供了加法和减法接口，目前仅仅用于生成默认的线程名字。
+
+CondVariable
+    对pthread线程库中条件变量pthread_cond_t的封装，提供了其最常用的方法。
+
+CondVarialbAttr
+    条件变量属性类，同其他属性类一样目前没有实现。

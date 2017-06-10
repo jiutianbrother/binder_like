@@ -12,10 +12,13 @@
 
 #include <MutexLockAttr.h>
 
+class CondVariable;
+
 class MutexLock {
+friend class CondVariable;
 
 public:
-    MutexLock(bool isLock = true, MutexLockAttr attr = MutexLockAttr());
+    explicit MutexLock(bool isLock = true, MutexLockAttr attr = MutexLockAttr());
     ~MutexLock();
 
     void lock();
