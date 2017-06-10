@@ -13,14 +13,14 @@ echo -e "\$(error The execable file $1\'s input can\'t empty)"
 echo -e "endif\n"
 
 echo -e "ifneq (,\$(exec_$1_libs))"
-echo -e "LDFLAGS := \$(LDFLAGS) \$(addprefix -l,\$(exec_$1_libs))"
+echo -e "ldflags := \$(addprefix -l,\$(exec_$1_libs))"
 echo -e "endif\n"
 
 #echo -e "ifneq (,\$(exec_$1_deps))"
 #echo -e "\$(build_path)/$1 : \$(exec_$1_deps)"
 #echo -e "\$(exec_$1_deps): \$(BUILDDIR)%.d: \$(TOPDIR)/%."
 echo -e "\$(build_path)/$1 : \$(curdir)/\$(exec_$1_srcs)"
-echo -e "\t\$(CXX) -o \$@ \$(CPPFLAGS) \$(CFLAGS) \$(CXXFLAGS) \$^ \$(LDFLAGS)"
+echo -e "\t\$(CXX) -o \$@ \$(CPPFLAGS) \$(CFLAGS) \$(CXXFLAGS) \$^ \$(LDFLAGS) \$(ldflags)"
 
 #echo -e "clean:"
 #echo -e "\t\$(RM) \$(build_path)/$1"

@@ -1,6 +1,8 @@
 #include <string>
 #include <fstream>
 
+#include <MutexLock.h>
+
 #ifndef	    __LOGGER_H
 #define	    __LOGGER_H
 
@@ -44,7 +46,7 @@ private:
     std::ofstream ofs;
 
     /*线程安全*/
-    //MutexLock mutex;
+    MutexLock mutex;
 };
 
 #endif

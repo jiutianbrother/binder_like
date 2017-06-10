@@ -25,6 +25,7 @@ using namespace std;
 /****************************************************/
 Logger::Logger(string file)
     : filePath("")
+    , mutex(false)
 {
 
     /* 获取日志文件完整路径 */
@@ -47,7 +48,7 @@ void Logger::log(string file, string func, const char* fmt, ...)
     string strTemp;
     va_list ap;
 
-    //MutexLock lock;
+    MutexGuard guard(&mutex);
     
     strTemp += "[";
     strTemp += Timestamp::getNowString();

@@ -1,0 +1,31 @@
+    这篇文档包含了线程相关的类的设计说明，具体有如下类：
+
+    1. Thread <-- utils/Thread.cpp、include/Thread.h
+    2. MutexLock、MutexGuard<-- utils/MutexLock.cpp、include/MutexLock.h
+    3. ThreadAttr <-- utils/ThreadAttr.cpp、include/ThreadAttr.h
+    4. MutexLockAttr <-- utils/MutexLockAttr.cpp、include/MutexLockAttr.h
+    5. AtomicInteger <-- include/AtomicInteger.h
+
+Thread
+    对pthreads中线程的简单封装。
+    线程对象本身不是线程安全的，所以如果需要同时在多个线程中操作同一个线程
+对象，要注意加锁保护。
+
+MutexLock
+    对pthreads中互斥锁的简单封装，提供了基本的lock、unlock、trylock接口。
+
+MutexGuard
+    为方便使用MutexLock而提供，该类构造函数会调用lock、析构函数会调用unlock。
+
+ThreadAttr
+    线程属性的抽象，目前为空类，尚未实现，表示会使用默认的线程属性创建线程，
+后期在实现过程中也应该注意：不要直接对pthread_attr_t进行封装，因为这样的封装
+会导致该类不可复制，所以应该首先将各个线程属性进行抽象为可复制的数据类型，在
+Thread中用该类初始化pthread_attr_t。
+
+MutexLockAttr
+    互斥锁属性的抽象，同ThreadAttr，目前也还没有实现，后续实现时应该注意遵守
+与ThreadAttr相同的规则。
+
+AtomicInteger
+    原子整数，提供了加法和减法接口，目前仅仅用于生成默认的线程名字。

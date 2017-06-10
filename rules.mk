@@ -58,11 +58,19 @@ endif
 #exec_xxx_srcs定义了本目录下需要编译到xxx的源文件（xxx为可执行文件名字）
 #exec_xxx_libs定义了编译exec_xxx_target需要的库
 ifneq (,$(exec_targets))
-temp := $(shell \
-  for f in $(exec_targets); do \
-    source $(TOPDIR)/gen_exec_makefile.sh $$f > $(build_path)/$$f.mk; \
-    [ $$? -eq 0 ] || echo "ERROR" && exit 1; \
-  done)
+$(warning exec_targets=$(exec_targets))
+$(foreach target,$(exec_targets),$(shell \
+	$(TOPDIR)/gen_exec_makefile.sh $(target) > $(build_path)/$(target).mk))
+#temp := $(shell \
+#	for f in $(exec_targets)  do\
+#    		echo "$$f"; \
+#    		source $(TOPDIR)/gen_exec_makefile.sh $$f > $(build_path)/$$f.mk; \
+#  	done)
+#    if [ $$? -ne 0 ]; then \
+#	echo "ERROR"; \
+#	exit 1; \
+#    fi; \
+$(warning temp==$(temp))
 ifeq ("ERROR",$(temp))
 $(error Can\'t generate execuable file Makefile)
 endif

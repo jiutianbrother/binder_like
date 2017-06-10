@@ -1,6 +1,8 @@
 subdirs := test
 
-lib_static_srcs := Logger.cpp \
-		Timestamp.cpp
+lib_static_srcs := Logger.cpp	\
+		Timestamp.cpp	\
+		MutexLock.cpp	\
+		Thread.cpp
 
 include $(TOPDIR)/rules.mk
